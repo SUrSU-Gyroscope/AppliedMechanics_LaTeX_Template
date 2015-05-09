@@ -1,0 +1,116 @@
+\documentclass{eskdtext}
+\usepackage[utf8]{inputenc}
+\bibliographystyle{ugost2008s}
+\usepackage{graphicx}
+\usepackage{svg}
+\usepackage{tikz}
+\usepackage{hyperref}
+
+\usetikzlibrary{calc}
+\usetikzlibrary{patterns}
+
+\ESKDauthor{Симпсон Г.А.}
+\ESKDchecker{\begin{scriptsize}Анисимов Я.О.\end{scriptsize}}
+\ESKDtitle{Семестровка по прикладной механике}
+\ESKDtitleDesignedBy{Студент группы КТУР-100}{Симпсон Г.А.}
+\ESKDtitleDesignedBy{Старший преподователь }{Анисимов Я.О.}
+
+
+
+
+
+\begin{document}
+\maketitle
+
+\section{Задача номер много варианта тоже клёвый}
+
+\subsection{Постановка задачи}
+
+Для кинматической схемы на рисунке \ref{fig:my_label}:
+
+\begin{itemize}
+\item провести анализ механизма;
+\item решить задачу о положении;
+\item решить задачу о скоростях.
+\end{itemize}
+
+При следующих параметрах \cite{adams1995hitchhiker} :  $L_{OA}=0,02~\mbox{м}; L_{BD}=0,1~\mbox{м}; L_{BC}=0,037~\mbox{м}$;
+  $L_{OD}=0,075~\mbox{м}; L_{OE}=0,035~\mbox{м}; \omega_{OA}=25~\mbox{с}^{-1}; \varphi_{OA}=225^{\circ}$\par
+  
+
+\begin{figure}[ht]
+\centering
+\begin{tikzpicture}[>=stealth, point/.style = {draw, circle, fill=white, inner sep = 1.5pt}]
+  % Значения углов и длин отрезков
+  \def\phiOA{225}
+  \def\phiAB{188}
+  \def\phiBC{122}
+  \def\LOA{2}
+  \def\LAB{1}
+  \def\LBC{3.75}
+  \def\LOD{7.5}
+
+  % Координаты точек
+  \coordinate (O) at (0, 0);
+  \coordinate (A) at ($(O)+(\phiOA:\LOA)$);
+  \coordinate (B) at ($(A)+(\phiAB:\LAB)$);
+  \coordinate (C) at ($(B)+(\phiBC:\LBC)$);
+  \coordinate (D) at (\LOD, 0);
+  \coordinate (C1) at ($ (C) + (0, 1) $);   % Точка, вместе с точкой C задающая вертикальную линию, проходящую через C (на чертеже не отображается)
+  \coordinate (E) at (intersection of O--D and C--C1);
+
+  % Нарисовать оси
+  \draw[dash pattern=on 30pt off 5pt on 1pt off 5pt] ($ (E) + (-2, 0) $) -- ($ (D) + (2, 0) $);
+  \draw[dash pattern=on 30pt off 5pt on 1pt off 5pt] ($ (O) + (0, -3) $) -- ($ (O) + (0, 3) $);
+  \draw[dash pattern=on 30pt off 5pt on 1pt off 5pt] (O) circle (\LOA);
+
+  % Линия, проходящая через точки C и E, со штриховкой
+  \def\hatchWidth{0.1}
+  \filldraw[draw=white, pattern=north east lines] ($ (C) + (-\hatchWidth, 1) $) rectangle ($ (E) + (0, -1) $);
+  \draw ($ (C) + (0, 1) $) -- ($ (E) + (0, -1) $);
+
+  % Место закрепления точки O
+  \filldraw[draw=white, pattern=north east lines] ($ (O) + (-0.5, -0.5) $) rectangle ($ (O) + (0.5, -0.5) + (0, -\hatchWidth) $);
+  \draw ($ (O) + (-0.5, -0.5) $) -- ($ (O) + (0.5, -0.5) $);
+  \draw (O) -- ($ (O) + (-0.3, -0.5) $);
+  \draw (O) -- ($ (O) + (0.3, -0.5) $);
+
+  % Место закрепления точки D
+  \filldraw[draw=white, pattern=north east lines] ($ (D) + (-0.5, -0.5) $) rectangle ($ (D) + (0.5, -0.5) + (0, -\hatchWidth) $);
+  \draw ($ (D) + (-0.5, -0.5) $) -- ($ (D) + (0.5, -0.5) $);
+  \draw (D) -- ($ (D) + (-0.3, -0.5) $);
+  \draw (D) -- ($ (D) + (0.3, -0.5) $);
+
+  % Нарисовать основные линии и точки на графике
+  \filldraw[fill=white] ($ (C) + (-0.2, 0.5) $) rectangle ($ (C) + (0.2, -0.5) $);
+  \draw (C) node[point, label={above right:$C$}]{} -- (B) node[point, label={below left:$B$}]{} -- (D) node[point, label={above:$D$}]{};
+  \filldraw[fill=white, rotate=\phiAB] ($ (A) + (-0.5, 0.2) $) rectangle ($ (A) + (0.5, -0.2) $);
+  \draw (O) node[point, label={below right:$O$}]{} -- (A) node[point, label={below right:$A$}]{};
+  \node at (E) [point, label={below left:$E$}]{};
+
+  % Стрелки с углом поворота и частотой вращения
+  \def\omegaVecRadius{.5}
+  \draw[->] ($ (O) + (\omegaVecRadius, 0) $) arc (0:\phiOA:\omegaVecRadius);
+  \node at ($ (O) + (.2, .2) $) [label={above right:$\varphi_{OA}$}]{};
+  \draw[->] ($ (O) + (60:1.5) $) arc (60:120:1.5);
+  \node at ($ (O) + (0, 1.3) $) [label=$\vec{\omega}_{OA}$]{};
+\end{tikzpicture}
+
+
+\caption{Кинметическая схема}
+\label{fig:my_label}
+\end{figure}
+
+\subsection{Решение задачи о скоростях}
+
+Тут мы пишем текст чтобы было понятно о чем формула номер \ref{eq:einstein}
+
+\begin{equation}
+E=mc^2
+\label{eq:einstein}
+\end{equation}
+
+\bibliography{reference}
+
+
+\end{document}

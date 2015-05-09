@@ -1,1 +1,3 @@
-# AppliedMechanics_LaTeX_Template
+# LaTeX_Templates
+Набор шаблонов для студентов
+
